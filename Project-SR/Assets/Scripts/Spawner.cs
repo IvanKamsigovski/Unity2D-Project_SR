@@ -9,28 +9,21 @@ public class Spawner : MonoBehaviour
     public GameObject [] spawnPoints;
     public GameObject powerUpSpawn;
 
+    public SpriteRenderer rend;
+    public Sprite[] spritesArr;
+
     public float spawnRate = 0;
 
-    public float powerupSpawnerRate = 5f;
-
-    private float powerUpTimer;
-    private float spawnTimer;
-
-    void Update()
+    void Start()
     {
-       spawnAsteroid();
-       //spawnPowerUp();
+        StartCoroutine(spawnAsteroid());
+        StartCoroutine(spawnPowerUp());
     }
 
-
-
-    void spawnAsteroid()
+    IEnumerator spawnAsteroid()
     {
+        yield return new WaitForSeconds(spawnRate);
         int rand = Random.Range(0, 7);
-
-        if (Time.time >= spawnTimer)
-        {
-            spawnTimer = Time.time + spawnRate;
             for (int i = 0; i < spawnPoints.Length; i++)
             {
                 if (i == rand)
@@ -38,38 +31,44 @@ public class Spawner : MonoBehaviour
                     Instantiate(asteroid1, spawnPoints[i].transform.position, Quaternion.identity);
                 }
             }
-        }
+        StartCoroutine(spawnAsteroid());
     }
 
-    void spawnPowerUp()
+    IEnumerator spawnPowerUp()
     {
+        float randTimer = Random.Range(20, 60);
+        yield return new WaitForSeconds(2);
+
+        int randSprite = Random.Range(0, spritesArr.Length);
+
         int rand = Random.Range(0, 3);
 
-        if (Time.time >= powerUpTimer)
+        switch (rand)
         {
-            powerUpTimer = Time.time + powerupSpawnerRate;
-            //Instantiate(powerUp, powerUpSpawn.transform.position, Quaternion.identity);
-              switch (rand)
-              {
-                  case 0:
-                      {
-                          Instantiate(powerUp, powerUpSpawn.transform.position, Quaternion.identity);
-                      }
-                      break;
-                  case 1:
-                      {
-                          Instantiate(powerUp, new Vector2(2, 7), Quaternion.identity);
-                      }
-                      break;
-                  case 2:
-                      {
-                          Instantiate(powerUp, new Vector2(-2, 7), Quaternion.identity);
-                      }
-                      break;
-                  default:
-                      Instantiate(powerUp, powerUpSpawn.transform.position, Quaternion.identity);
-                      break;
-              }
+            case 0:
+                {
+                    Instantiate(powerUp, powerUpSpawn.transform.position, Quaternion.identity);
+                    rend.sprite = spritesArr[randSprite];
+                }
+                break;
+            case 1:
+                {
+                    Instantiate(powerUp, new Vector2(2, 7), Quaternion.identity);
+                    rend.sprite = spritesArr[randSprite];
+                }
+                break;
+            case 2:
+                {
+                    Instantiate(powerUp, new Vector2(-2, 7), Quaternion.identity);
+                    rend.sprite = spritesArr[randSprite];
+                }
+                break;
+            default:
+                Instantiate(powerUp, powerUpSpawn.transform.position, Quaternion.identity);
+                rend.sprite = spritesArr[randSprite];
+                break;
+
         }
+        StartCoroutine(spawnPowerUp());
     }
 }

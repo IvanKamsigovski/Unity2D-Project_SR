@@ -24,6 +24,11 @@ public class Core : MonoBehaviour
         currentHelth -= helth;
     }
 
+    public static void RemoveHelth(int helth)
+    {
+        currentHelth += helth;
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Asteroid")
