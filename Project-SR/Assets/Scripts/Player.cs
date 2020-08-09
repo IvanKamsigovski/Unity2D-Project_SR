@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public float speed;
+    public float rotatinonDirection = 1;
 
     public float bulletSpeed;
     public Transform bulletPossition;
@@ -37,11 +38,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            transform.RotateAround(Vector3.zero, Vector3.forward, Time.deltaTime * -speed);
+            transform.RotateAround(Vector3.zero, Vector3.forward,-rotatinonDirection * Time.deltaTime * speed);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.RotateAround(Vector3.zero, Vector3.forward, Time.deltaTime * speed);
+            transform.RotateAround(Vector3.zero, Vector3.forward, rotatinonDirection * Time.deltaTime * speed);
         }
     }
 

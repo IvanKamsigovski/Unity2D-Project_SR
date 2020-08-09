@@ -8,6 +8,7 @@ TagManager:
   - Asteroid
   - PlayerBullet
   - Ring
+  - PowerUp
   layers:
   - Default
   - TransparentFX

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Core : MonoBehaviour
 {
     public int maxHelth;
-    public int currentHelth;
+    public static int currentHelth = 0;
 
     public ExplosionBar explosionBar;
 
@@ -17,6 +17,11 @@ public class Core : MonoBehaviour
     private void Update()
     {
         explosionBar.SetBar(currentHelth);
+    }
+
+    public static void AddHelth(int helth)
+    {
+        currentHelth -= helth;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
