@@ -19,6 +19,7 @@ public class Core : MonoBehaviour
         explosionBar.SetBar(currentHelth);
     }
 
+    //Popravit buigc gdje ne rade obe zajedno
     public static void AddHelth(int helth)
     {
         currentHelth -= helth;

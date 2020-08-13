@@ -37,7 +37,7 @@ public class Spawner : MonoBehaviour
     IEnumerator spawnPowerUp()
     {
         float randTimer = Random.Range(20, 60);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
 
         int randSprite = Random.Range(0, spritesArr.Length);
 

@@ -9,12 +9,9 @@ public class Asteroid : MonoBehaviour
     public float targetDistance;
 
     private Transform target;
-    private Rigidbody2D rb;
-
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Core").GetComponent<Transform>();
     }
 
